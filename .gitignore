@@ -21,6 +21,7 @@ htmlcov/
 
 # ── Environment Variables ────────────────────
 .env
+.env.example
 
 # ── Logs ──────────────────────────────────────
 logs/
