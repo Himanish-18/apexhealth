@@ -67,6 +67,9 @@ class Settings(BaseSettings):
     ncbi_email: str = ""
     ncbi_tool: str = "HealthcareKnowledgeNavigator"
 
+    # ── Parsing Pipeline ────────────────────────────────────────────
+    max_parse_workers: int | None = None  # None = use CPU count
+
     # ── Derived Paths ───────────────────────────────────────────────
     @property
     def data_dir(self) -> Path:
@@ -92,6 +95,16 @@ class Settings(BaseSettings):
     def metadata_dir(self) -> Path:
         """Directory for per-paper metadata JSON files."""
         return self.data_dir / "metadata"
+
+    @property
+    def parsing_logs_dir(self) -> Path:
+        """Directory for parsing pipeline logs."""
+        return self.data_dir / "logs" / "parsing"
+
+    @property
+    def invalid_json_dir(self) -> Path:
+        """Directory for quarantined invalid JSON files."""
+        return self.data_dir / "logs" / "invalid_json"
 
     @property
     def ingestion_logs_dir(self) -> Path:
