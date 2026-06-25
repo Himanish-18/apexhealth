@@ -70,6 +70,13 @@ class Settings(BaseSettings):
     # ── Parsing Pipeline ────────────────────────────────────────────
     max_parse_workers: int | None = None  # None = use CPU count
 
+    # ── Chunking Pipeline ───────────────────────────────────────────
+    max_chunk_workers: int | None = None  # None = use CPU count
+    chunk_target_tokens: int = 512
+    chunk_min_tokens: int = 50
+    chunk_max_tokens: int = 600
+    chunk_overlap_tokens: int = 75
+
     # ── Derived Paths ───────────────────────────────────────────────
     @property
     def data_dir(self) -> Path:
@@ -105,6 +112,11 @@ class Settings(BaseSettings):
     def invalid_json_dir(self) -> Path:
         """Directory for quarantined invalid JSON files."""
         return self.data_dir / "logs" / "invalid_json"
+
+    @property
+    def chunking_logs_dir(self) -> Path:
+        """Directory for chunking pipeline logs and statistics."""
+        return self.data_dir / "logs" / "chunking"
 
     @property
     def ingestion_logs_dir(self) -> Path:
