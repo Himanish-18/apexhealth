@@ -36,6 +36,10 @@ deepeval>=1.5.0
 # ── Tokenization ─────────────────────────────
 tiktoken>=0.8.0
 
+# ── Numerical / System ────────────────────────
+numpy>=1.26.0
+psutil>=5.9.0
+
 # ── Utilities ─────────────────────────────────
 python-dotenv>=1.0.0
 httpx>=0.28.0

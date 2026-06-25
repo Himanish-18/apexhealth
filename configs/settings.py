@@ -77,6 +77,10 @@ class Settings(BaseSettings):
     chunk_max_tokens: int = 600
     chunk_overlap_tokens: int = 75
 
+    # ── Embedding Pipeline ──────────────────────────────────────────
+    embedding_batch_size: int = 32
+    embedding_model_name: str = "ncbi/MedCPT-Article-Encoder"
+
     # ── Derived Paths ───────────────────────────────────────────────
     @property
     def data_dir(self) -> Path:
@@ -112,6 +116,16 @@ class Settings(BaseSettings):
     def invalid_json_dir(self) -> Path:
         """Directory for quarantined invalid JSON files."""
         return self.data_dir / "logs" / "invalid_json"
+
+    @property
+    def embeddings_dir(self) -> Path:
+        """Directory for generated embedding files."""
+        return self.data_dir / "embeddings"
+
+    @property
+    def embedding_logs_dir(self) -> Path:
+        """Directory for embedding pipeline logs and statistics."""
+        return self.data_dir / "logs" / "embeddings"
 
     @property
     def chunking_logs_dir(self) -> Path:
