@@ -81,6 +81,13 @@ class Settings(BaseSettings):
     embedding_batch_size: int = 32
     embedding_model_name: str = "ncbi/MedCPT-Article-Encoder"
 
+    # ── Indexing Pipeline ───────────────────────────────────────────
+    indexing_batch_size: int = 256
+    sparse_model_name: str = "Qdrant/bm25"
+    dense_vector_name: str = "dense"
+    sparse_vector_name: str = "sparse-bm25"
+    dense_vector_size: int = 768
+
     # ── Derived Paths ───────────────────────────────────────────────
     @property
     def data_dir(self) -> Path:
@@ -126,6 +133,11 @@ class Settings(BaseSettings):
     def embedding_logs_dir(self) -> Path:
         """Directory for embedding pipeline logs and statistics."""
         return self.data_dir / "logs" / "embeddings"
+
+    @property
+    def indexing_logs_dir(self) -> Path:
+        """Directory for indexing pipeline logs and statistics."""
+        return self.data_dir / "logs" / "indexing"
 
     @property
     def chunking_logs_dir(self) -> Path:
